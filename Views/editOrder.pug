@@ -1,0 +1,12 @@
+EDITAR PEDIDO
+form(role="form" method="POST" action="/orders/edit/" + order.id)
+    div.form-group 
+        label(for="id_customer") Id do Cliente: 
+        input#name.form-control(type="number", placeholder="id_customer" name="id_customer" value=order.id_customer)
+    div.form-group 
+        label(for="id_product") Id do Produto: 
+        input#name.form-control(type="number", placeholder="id_product" name="id_product" value=order.id_product)
+    div.form-group 
+        label(for="quantity") Quantidade: 
+        input#name.form-control(type="number", name="quantity" value=order .quantity)
+    button.btn-btn-primary(type="submit", name="asdf") Editar

@@ -1,0 +1,20 @@
+a(class="button" href="/products/create") Novo Produto 
+br
+br
+
+table 
+    tr 
+        td Id
+        td Nome
+        td Descrição
+        td Valor
+    each p in products
+        tr
+            td= p.id
+            td= p.name
+            td= p.description
+            td= value
+            td
+                a(class="button" href="/products/edit/" + p.id) Editar
+            td
+                a(class="button" href="/products/del/" + p.id) Deletar

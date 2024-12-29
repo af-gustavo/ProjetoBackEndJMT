@@ -1,0 +1,12 @@
+NOVO PRODUTO 
+form(role="form" method="POST" action="/products/create")
+    div.form-group 
+        label(for="name") Nome: 
+        input#name.form-control(type="text", placeholder="Name" name="name")
+    div.form-group 
+        label(for="description") Descrição: 
+        input#name.form-control(type="text", placeholder="Description" name="description")
+    div.form-group 
+        label(for="value") Valor: 
+        input#name.form-control(type="number", name="value")
+    button.btn-btn-primary(type="submit", name="asdf") Adicionar
