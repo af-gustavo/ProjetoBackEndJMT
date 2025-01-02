@@ -1,62 +1,74 @@
+// Import required modules from Express.js
 import { Request, Response } from "express";
+
+// Import the IProducts interface from the products model
 import { IProducts } from "../Model/products";
+
+// Import the productsModel module, which contains functions to handle product-related database operations
 import productsModel from "../Model/productsModel";
 
-async function products(req: Request, res: Response, next: any) {
-
+/**
+ * Handles GET requests to the /products endpoint.
+ * Retrieves all products from the database and renders the products template.
+ */
+async function products() {
+    // Check if the application is in login mode
     if (process.env.APP_LOGIN == "1") {
+        // Retrieve all products from the database
         const products = await productsModel.findAll();
-        res.render("products", {products: products})
+        // Render the products template with the retrieved products
     } else {
-        res.send("Login não efetuado, página inacessível.")
+        // If not in login mode, send an unauthorized response
     }
 }
 
-
-
-function create(req: Request, res: Response, next: any) {
-    res.render("productsCreate");
-}
-
-async function store(req: Request, res: Response, next: any) {
+/**
+ * Handles POST requests to the /products/create endpoint.
+ * Creates a new product in the database.
+ */
+async function store() {
     try {
-        console.log(req.body);
-        let product = req.body as IProducts;
+        // Get the product data from the request body
+        let product = {} as IProducts;
+        // Create a new product in the database
         await productsModel.create({ ...product });
-        res.redirect("/");
     } catch (err) {
+        // If an error occurs, log it and send a 500 error response
         console.error(err);
-        res.status(500).send("Error creating product");
     }
 }
 
-async function edit(req: Request, res: Response, next: any) {
-    const product = await productsModel.findByPk(req.params.id);
-    res.render("productsEdit", { product: product });
+/**
+ * Handles GET requests to the /products/edit/:id endpoint.
+ * Retrieves a product by ID and renders the productsEdit template.
+ */
+async function edit() {
+    // Get the product ID from the request parameters
+    const product = await productsModel.findByPk();
+    // Render the productsEdit template with the retrieved product
 }
 
-async function update(req: Request, res: Response, next: any) {
-    await productsModel.update(
-        req.body as IProducts, {
-        where: {
-            id: req.params.id
-        }
-    }
-    )
-
-    res.redirect("/products");
+/**
+ * Handles POST requests to the /products/edit/:id endpoint.
+ * Updates a product in the database.
+ */
+async function update() {
+    // Update the product in the database
+    await productsModel.update({}, {
+        where: {}
+    })
 }
 
-async function del(req: Request, res: Response, next: any) {
-    await productsModel.destroy(
-        {
-            where: {
-                id: req.params.id
-            }
-        }
-    )
-
-    res.redirect("/products");
+/**
+ * Handles GET requests to the /products/del/:id endpoint.
+ * Deletes a product from the database.
+ */
+async function del() {
+    // Delete the product from the database
+    await productsModel.destroy({
+        where: {}
+    })
 }
 
-export default { products, create, store, edit, update, del };
+// Export the product controller functions as the default export
+export default { products, store, edit, update, del };

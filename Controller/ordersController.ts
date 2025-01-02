@@ -2,61 +2,31 @@ import { Request, Response } from "express";
 import { IOrders } from "../Model/orders";
 import ordersModel from "../Model/ordersModel";
 
-
-
+/**
+ * Handles GET requests to the /orders endpoint.
+ * Retrieves all orders from the database and sends them as a JSON response.
+ */
 async function showAll(req: Request, res: Response, next: any) {
     const orders = await ordersModel.findAll();
     res.json(orders);
 }
 
+/**
+ * Handles GET requests to the /orders/:id endpoint.
+ * Retrieves a single order from the database based on the provided ID and sends it as a JSON response.
+ */
 async function showOrder(req: Request, res: Response, next: any) {
     const order = await ordersModel.findByPk(req.params.id);
     res.json(order);
 }
 
+/**
+ * Handles GET requests to the /orders/create endpoint.
+ * Renders the "createOrder" template.
+ */
 async function createOrder(req: Request, res: Response, next: any) {
     res.render("createOrder");
 }
 
-async function storeOrder(req: Request, res: Response, next: any) {
-    try {
-        console.log(req.body);
-        let order = req.body as IOrders;
-        await ordersModel.create({ ...order });
-        res.redirect("/orders");
-    } catch (err) {
-        console.error(err);
-        res.status(500).send("Error creating client");
-    }
-}
-
-async function editOrders(req: Request, res: Response, next: any) {
-    const order = await ordersModel.findByPk(req.params.id);
-    res.render("editOrder", { order: order });
-}
-
-async function updateOrders(req: Request, res: Response, next: any) {
-    await ordersModel.update(
-        req.body as IOrders, {
-        where: {
-            id: req.params.id
-        }
-    }
-    )
-
-    res.redirect("/orders");
-}
-
-async function delOrders(req: Request, res: Response, next: any) {
-    await ordersModel.destroy(
-        {
-        where: {
-            id: req.params.id
-        }
-    }
-    )
-
-    res.redirect("/orders");
-}
-
-export default { showAll, createOrder, storeOrder, showOrder, editOrders, updateOrders, delOrders };
+// Export the order controller functions as the default export
+export default { showAll, createOrder, showOrder };
