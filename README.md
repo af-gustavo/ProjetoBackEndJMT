@@ -14,13 +14,14 @@ The project is organized into the following directories:
 - db: Contains the database connection module.
 
 ## General Idea
-The project seems to be designed to manage a simple e-commerce system. The API endpoints allow for CRUD (Create, Read, Update, Delete) operations on clients, users, products, and orders.
+The project is designed to manage a simple e-commerce system. The API endpoints allow for CRUD (Create, Read, Update, Delete) operations on clients, users, products, and orders.
 
 - Clients can be created, read, updated, and deleted.
 - Users can be created, read, updated, and deleted.
 - Products can be created, read, updated, and deleted.
 - Orders can be created, read, updated, and deleted.
-- The project uses Sequelize as an ORM (Object-Relational Mapping) tool to interact with the database. The database connection is established using the db module.
+
+The project uses Sequelize as an ORM (Object-Relational Mapping) tool to interact with the database. The database connection is established using the db module.
 
 ## API Endpoints
 The API endpoints are defined in the Router directory and are mounted in the app.ts file. The endpoints are organized by resource (clients, users, products, and orders).
