@@ -2,7 +2,7 @@
 ======================
 
 ## Overview
-ProjetoBackEndJMT is a backend project built using Node.js, Express.js, and Sequelize. It appears to be a RESTful API for managing clients, users, products, and orders.
+ProjetoBackEndJMT is a backend project built using Node.js, Express.js, and Sequelize. It is a RESTful API for managing clients, users, products, and orders.
 
 ## Structure
 The project is organized into the following directories:
